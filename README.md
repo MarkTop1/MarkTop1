@@ -40,9 +40,9 @@
 <p align="center"><b>SELECTED WORK</b></p>
 
 <div align="center">
-  <a href="https://github.com/MarkTop1/MyGarden-MK"><img src="assets/card-repo-1.svg" width="275" alt="MyGarden-MK" /></a>
-  <a href="https://github.com/MarkTop1/eliaome"><img src="assets/card-repo-2.svg" width="275" alt="eliaome" /></a>
-  <a href="https://github.com/MarkTop1/bath-not-bath"><img src="assets/card-repo-3.svg" width="275" alt="bath-not-bath" /></a>
+  <a href="https://github.com/MarkTop1/MyGarden-MK"><img src="assets/card-repo-1.svg" width="264" alt="MyGarden-MK" /></a>
+  <a href="https://github.com/MarkTop1/eliaome"><img src="assets/card-repo-2.svg" width="264" alt="eliaome" /></a>
+  <a href="https://github.com/MarkTop1/bath-not-bath"><img src="assets/card-repo-3.svg" width="264" alt="bath-not-bath" /></a>
 </div>
 
 ---
