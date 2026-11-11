@@ -17,8 +17,18 @@ from datetime import datetime, timezone
 USER = os.environ.get("GH_USER", "MarkTop1")
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN") or ""
 OUT = os.environ.get("OUT_DIR", "assets")
-# 想展示哪两个仓库，用逗号分隔；留空则按 Star 数自动取前两个
+# 想展示哪几个仓库，用逗号分隔；留空则按 Star 数自动排
 FEATURED = [s.strip() for s in os.environ.get("FEATURED", "").split(",") if s.strip()]
+
+# 仓库没填 GitHub Description 时的兜底文案（填了 Description 就优先用 Description）
+DESCRIPTIONS = {
+    "MyGarden-MK": "离线单机的 Android 植物养护记录 App",
+    "eliaome": "每日出货记录，附赠一个不太正经的小游戏",
+    "bath-not-bath": "一个不太正经的小实验",
+}
+
+CARD_W = 275
+CARD_H = 128
 
 BG = "#0a0a0a"
 BORDER = "#161616"
@@ -207,39 +217,42 @@ def langs_card(repos):
 
 # ---------------------------------------------------------------- repo card
 def repo_card(repo):
-    name = esc(clip(repo.get("name", ""), 20))
-    raw_desc = (repo.get("description") or "").strip()
+    raw_name = repo.get("name", "")
+    name = esc(clip(raw_name, 15))
+    raw_desc = (repo.get("description") or "").strip() or DESCRIPTIONS.get(raw_name, "")
     lang = repo.get("language") or "—"
-    desc = esc(clip(raw_desc, 29)) if raw_desc else "No description yet"
+    desc = esc(clip(raw_desc, 20)) if raw_desc else "No description yet"
     desc_fill = "#7d7d7d" if raw_desc else "#3a3a3a"
     stars = repo.get("stargazers_count", 0)
     forks = repo.get("forks_count", 0)
     stamp = updated_ago(repo.get("pushed_at") or repo.get("updated_at"))
 
-    meta = ['<circle cx="29" cy="100" r="3.4" fill="%s"/>' % lang_color(lang),
-            '<text x="38" y="104" font-family="%s" font-size="11" fill="%s">%s</text>'
-            % (FONT, DIM, esc(lang))]
-    cursor = 38 + em_width(lang) * 11 + 16
+    meta = ['<circle cx="23" cy="%d" r="3.2" fill="%s"/>' % (CARD_H - 27, lang_color(lang)),
+            '<text x="32" y="%d" font-family="%s" font-size="10.5" fill="%s">%s</text>'
+            % (CARD_H - 23, FONT, DIM, esc(lang))]
+    cursor = 32 + em_width(lang) * 10.5 + 14
     if stars:
-        meta.append('<text x="%.0f" y="104" font-family="%s" font-size="11" fill="%s">★ %s</text>'
-                    % (cursor, MONO, DIM, compact(stars)))
-        cursor += 46
+        meta.append('<text x="%.0f" y="%d" font-family="%s" font-size="10.5" fill="%s">★ %s</text>'
+                    % (cursor, CARD_H - 23, MONO, DIM, compact(stars)))
+        cursor += 42
     if forks:
-        meta.append('<text x="%.0f" y="104" font-family="%s" font-size="11" fill="%s">⑂ %s</text>'
-                    % (cursor, MONO, DIM, compact(forks)))
+        meta.append('<text x="%.0f" y="%d" font-family="%s" font-size="10.5" fill="%s">⑂ %s</text>'
+                    % (cursor, CARD_H - 23, MONO, DIM, compact(forks)))
     if stamp:
-        meta.append('<text x="404" y="104" text-anchor="end" font-family="%s" font-size="10.5" '
-                    'fill="#3f3f3f">updated %s</text>' % (FONT, esc(stamp)))
+        meta.append('<text x="%d" y="%d" text-anchor="end" font-family="%s" font-size="9.5" '
+                    'fill="#3a3a3a">%s</text>' % (CARD_W - 20, CARD_H - 23, FONT, esc(stamp)))
 
     return (
-        '<svg xmlns="http://www.w3.org/2000/svg" width="430" height="134" '
-        'viewBox="0 0 430 134" fill="none" role="img" aria-label="%s">'
-        '<rect x="0.5" y="0.5" width="429" height="133" rx="20" fill="%s" stroke="%s"/>'
-        '<text x="26" y="44" font-family="%s" font-size="17" font-weight="600" '
-        'letter-spacing="-0.4" fill="%s">%s</text>'
-        '<text x="26" y="72" font-family="%s" font-size="12.5" fill="%s">%s</text>'
+        '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" '
+        'viewBox="0 0 %d %d" fill="none" role="img" aria-label="%s">'
+        '<rect x="0.5" y="0.5" width="%d" height="%d" rx="18" fill="%s" stroke="%s"/>'
+        '<text x="20" y="40" font-family="%s" font-size="15.5" font-weight="600" '
+        'letter-spacing="-0.3" fill="%s">%s</text>'
+        '<text x="20" y="67" font-family="%s" font-size="11" fill="%s">%s</text>'
         "%s</svg>"
-        % (name, BG, BORDER, FONT, WHITE, name, FONT, desc_fill, desc, "".join(meta))
+        % (CARD_W, CARD_H, CARD_W, CARD_H, name,
+           CARD_W - 1, CARD_H - 1, BG, BORDER,
+           FONT, WHITE, name, FONT, desc_fill, desc, "".join(meta))
     )
 
 
@@ -256,7 +269,7 @@ def main():
     else:
         picked = sorted(repos, key=lambda r: -r.get("stargazers_count", 0))
 
-    picked = picked[:2]
+    picked = picked[:6]
     for idx, repo in enumerate(picked, start=1):
         write("card-repo-%d.svg" % idx, repo_card(repo))
 

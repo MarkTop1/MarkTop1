@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_USER: MarkTop1
-          FEATURED: MyGarden-MK,bath-not-bath
+          FEATURED: MyGarden-MK,eliaome,bath-not-bath
         run: python3 scripts/gen_cards.py
 
       - name: Commit if changed

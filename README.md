@@ -10,8 +10,9 @@
     assets/card-langs.svg  同上
     assets/card-repo-1.svg 同上（第 1 个精选仓库）
     assets/card-repo-2.svg 同上（第 2 个精选仓库）
+    assets/card-repo-3.svg 同上（第 3 个精选仓库）
 
-  想改精选哪两个仓库 → 改 .github/workflows/cards.yml 里的 FEATURED
+  想改精选哪几个仓库 → 改 .github/workflows/cards.yml 里的 FEATURED（逗号分隔，最多 6 个）
   想改技术栈 chip   → 删掉对应的那行 <img>
 -->
 
@@ -38,16 +39,11 @@
 
 <p align="center"><b>SELECTED WORK</b></p>
 
-<table align="center">
-  <tr>
-    <td align="center" valign="top">
-      <a href="https://github.com/MarkTop1/MyGarden-MK"><img src="assets/card-repo-1.svg" width="429" alt="MyGarden-MK" /></a>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://github.com/MarkTop1/bath-not-bath"><img src="assets/card-repo-2.svg" width="429" alt="bath-not-bath" /></a>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <a href="https://github.com/MarkTop1/MyGarden-MK"><img src="assets/card-repo-1.svg" width="275" alt="MyGarden-MK" /></a>
+  <a href="https://github.com/MarkTop1/eliaome"><img src="assets/card-repo-2.svg" width="275" alt="eliaome" /></a>
+  <a href="https://github.com/MarkTop1/bath-not-bath"><img src="assets/card-repo-3.svg" width="275" alt="bath-not-bath" /></a>
+</div>
 
 ---
 
