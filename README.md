@@ -1,12 +1,18 @@
 <!--
   M1_998 · GitHub 主页
-  视觉语言参考 bencho.dev：纯黑背景 / 白字 / 大字号收紧字距 / 深灰圆角卡片 / 胶囊按钮
+  视觉语言参考 bencho.dev：纯黑背景 / 白字 / 大字号收紧字距 / 深灰圆角卡片
+
   用户名 MarkTop1 · 显示名 M1_998
 
-  需要改的东西只有三处：
-    1) assets/header.svg —— 头图，用文本编辑器就能改名字和副标题
-    2) 下面「技术栈」那排 chip，不用的整行删掉
-    3) 想加邮箱 / 博客：照着已有 <a><img></a> 复制一行
+  ── 所有卡片都是本仓库自己生成的，不依赖任何第三方服务 ──
+    assets/header.svg      手写的头图
+    assets/card-stats.svg  由 scripts/gen_cards.py 生成，每天自动刷新
+    assets/card-langs.svg  同上
+    assets/card-repo-1.svg 同上（第 1 个精选仓库）
+    assets/card-repo-2.svg 同上（第 2 个精选仓库）
+
+  想改精选哪两个仓库 → 改 .github/workflows/cards.yml 里的 FEATURED
+  想改技术栈 chip   → 删掉对应的那行 <img>
 -->
 
 <div align="center">
@@ -34,20 +40,12 @@
 
 <table align="center">
   <tr>
-    <td align="center" width="50%">
-      <a href="https://github.com/MarkTop1/MyGarden-MK">
-        <img src="https://github-readme-stats.vercel.app/api/pin/?username=MarkTop1&repo=MyGarden-MK&hide_border=true&bg_color=000000&title_color=ffffff&icon_color=8a8a8a&text_color=8f8f8f" />
-      </a>
+    <td align="center" valign="top">
+      <a href="https://github.com/MarkTop1/MyGarden-MK"><img src="assets/card-repo-1.svg" width="429" alt="MyGarden-MK" /></a>
     </td>
-    <td align="center" width="50%">
-      <a href="https://github.com/MarkTop1/bath-not-bath">
-        <img src="https://github-readme-stats.vercel.app/api/pin/?username=MarkTop1&repo=bath-not-bath&hide_border=true&bg_color=000000&title_color=ffffff&icon_color=8a8a8a&text_color=8f8f8f" />
-      </a>
+    <td align="center" valign="top">
+      <a href="https://github.com/MarkTop1/bath-not-bath"><img src="assets/card-repo-2.svg" width="429" alt="bath-not-bath" /></a>
     </td>
-  </tr>
-  <tr>
-    <td align="center"><sub>用代码养一小片花园</sub></td>
-    <td align="center"><sub>一个不太正经的小实验</sub></td>
   </tr>
 </table>
 
@@ -56,11 +54,11 @@
 <p align="center"><b>NUMBERS</b></p>
 
 <div align="center">
+  <img src="assets/card-stats.svg" width="100%" alt="GitHub stats" />
+</div>
 
-<img height="160" src="https://github-readme-stats.vercel.app/api?username=MarkTop1&show_icons=true&hide_border=true&bg_color=000000&title_color=ffffff&text_color=8f8f8f&icon_color=ffffff&include_all_commits=true" />
-
-<img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=MarkTop1&layout=compact&hide_border=true&bg_color=000000&title_color=ffffff&text_color=8f8f8f&langs_count=6" />
-
+<div align="center">
+  <img src="assets/card-langs.svg" width="100%" alt="Top languages" />
 </div>
 
 ---
@@ -94,7 +92,6 @@
 
 <p align="center">
   <a href="https://github.com/MarkTop1"><img src="https://img.shields.io/badge/GitHub-@MarkTop1-151515?style=flat&logo=github&logoColor=ffffff" /></a>
-  <a href="https://github.com/MarkTop1?tab=repositories"><img src="https://img.shields.io/badge/Repositories-7-151515?style=flat&logo=gitbook&logoColor=a3a3a3" /></a>
   <img src="https://img.shields.io/badge/Location-Earth-151515?style=flat&logo=googlemaps&logoColor=a3a3a3" />
 </p>
 

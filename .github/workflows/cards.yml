@@ -1,0 +1,40 @@
+name: Refresh cards
+
+on:
+  # 每天 UTC 03:00 刷新一次统计卡片
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate svg cards
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_USER: MarkTop1
+          FEATURED: MyGarden-MK,bath-not-bath
+        run: python3 scripts/gen_cards.py
+
+      - name: Commit if changed
+        run: |
+          if [ -n "$(git status --porcelain assets)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add assets
+            git commit -m "chore: refresh stats cards"
+            git push
+          else
+            echo "nothing changed"
+          fi
